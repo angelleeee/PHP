@@ -1,0 +1,28 @@
+.li{
+    display: flex;
+    box-sizing: content-box;
+    border: 3px solid #0a0000;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    width: 20%;
+    border-color: antiquewhite;
+    margin-left: 0%;
+    
+}
+
+  
+.li button{    
+    font-size: 15px;
+    position: absolute;
+    translate: 300px 0px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-color: antiquewhite;
+    margin-right: 10px;
+    cursor: pointer;
+    
+}
+.boton-eliminar{
+    margin-left: 55px;
+} 

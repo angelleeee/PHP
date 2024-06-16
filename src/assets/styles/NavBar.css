@@ -1,0 +1,35 @@
+#lista{
+    height: 50px;
+    width: 100%;
+    list-style: none;
+    margin-right: 20px;
+    margin-bottom: 5px;
+    line-height: 30px;
+    padding: 10px;
+    display: flex;
+    justify-content: right;
+    
+}
+
+#lista  a{
+    color: antiquewhite;
+    background-color: #888;
+    border-radius: 10px;
+    padding: 13px;
+    align-content: center;
+    text-decoration: none;
+}
+
+nav ul li{
+    width: 100%;
+    list-style: none;
+    padding: 10px;
+    font-size: 15px;
+}
+
+nav ul li:hover{
+    color:blue;
+    cursor: pointer;
+    transform: translateY(20px);
+}
+
