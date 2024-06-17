@@ -50,7 +50,7 @@ function Propiedad(){
         }         
     }
 
-
+    hola
     return(
         <div>
             <HeaderComponent/>
