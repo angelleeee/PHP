@@ -49,7 +49,6 @@ function Propiedad(){
             }).then(() => loadData()).catch(error => console.error('Error fetching data:', error));
         }         
     }
-    hola
     return(
         <div>
             <HeaderComponent/>
