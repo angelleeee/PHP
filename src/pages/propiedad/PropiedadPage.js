@@ -62,7 +62,7 @@ function Propiedad(){
                         Fecha disponibilidad: {item.fecha_inicio_disponibilidad}<br/>
                         Valor Noche:{item.valor_noche}<br/>
                         Cantidad de Huespedes: {item.cantidad_huespedes}<br/>
-                        <button className="boton">Editar</button>
+                        <button type="boton" className="boton"><a href="http://localhost:3000/editar" >Editar</a></button>
                         <button className="boton-eliminar" onClick={() => handleDelete(item.id)}>Eliminar</button>
                     </li> ))
                 }
