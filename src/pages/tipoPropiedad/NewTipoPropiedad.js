@@ -13,17 +13,14 @@
         setShowInput(false);
     }
 
-
+    
     const [message, setMessage] = useState('');
     const [nombre, setNombre] = useState('');
-    const [error, setError] = useState('');
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (!nombre) {
-          setError('El nombre no puede estar vacío.');
-          return;
-        }
+  
     
         const data = { nombre };
     
@@ -41,13 +38,18 @@
           }
           setMessage(data.message);
           setNombre(''); // Limpiar el campo de entrada después de un envío exitoso
-          setError('');
         })
         .then(() => cerrar())
         .then(() => updateData())
         .catch((error) => {
-          console.error('Error:', error);
-          setError('Hubo un error al enviar los datos.');
+          console.log('Error:', error);
+
+          if (!nombre) {
+            alert('El nombre no puede estar vacío.')
+          }else{
+            alert('El tipo de propiedad no puede repetirse')
+          }
+
         });
       };
   return (
@@ -55,7 +57,7 @@
     
     <form onSubmit={handleSubmit}>
       <div>
-        <button type="button" onClick={handleButtonClick}>Crear Nuevo tipo de propiedad</button>
+        
         {showInput && <input
           type="text"
           id="nombre"   
