@@ -61,13 +61,12 @@ function Reserva(){
                         Fecha desde: {item.fecha_desde}<br/>
                         Cantidad de noches: {item.cantidad_noches}<br/>
                         Valor total: {item.valor_total}<br/>
-                        <button className="boton">Editar</button>
+                        <button type="boton" className="boton"><a href="http://localhost:3000/reserva/editar" >Editar</a></button>
                         <button className="boton-eliminar" onClick={() => handleDelete(item.id)}>Eliminar</button>
                     </li> ))
                 }
-                
              </ul>
-             <NewReserva updateData={loadData}/>
+             <button type="boton" id="nuevo" className="boton"><a href="http://localhost:3000/reserva/crear">Hacer una reserva</a></button>
             <FooterComponent/>
         </div>
     )

@@ -66,9 +66,8 @@ function Propiedad(){
                         <button className="boton-eliminar" onClick={() => handleDelete(item.id)}>Eliminar</button>
                     </li> ))
                 }
-                
              </ul>
-            <NewPropiedad/>
+             <button type="boton" id="nuevo" className="boton"><a href="http://localhost:3000/crear">Crear propiedad</a></button>
             <FooterComponent/>
         </div>
     )

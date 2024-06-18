@@ -15,6 +15,20 @@ const Header = () => {
                 return 'Propiedades-Lee';
             case '/propiedad':
                 return 'Propiedades';
+            case '/tipo_propiedad/editar':
+                return 'Editar tipo de propiedad';
+            case '/tipo_propiedad/crear':
+                return 'Crear tipo propiedad';
+            case '/reserva/editar':
+                return 'Editar';
+            case '/reserva/crear':
+                return 'Hacer una reserva';
+            case '/crear':
+                return 'Crear';
+            case '/editar':
+                return 'Editar';
+            case '/detalle':
+                    return 'Detalle';
         }
     }
 

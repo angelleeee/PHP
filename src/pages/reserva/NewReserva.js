@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Header from '../../components/HeaderComponent';
+import FooterComponent from '../../components/FooterComponent';
 
 const NewReserva = ({updateData}) => {
     const [propiedades, setPropiedades] = useState([]);
@@ -52,7 +54,7 @@ const NewReserva = ({updateData}) => {
 
     return (
         <div>
-            <h2>Nueva Reserva</h2>
+            <Header/>
             <form onSubmit={handleSubmit}>
                 <label>
                     Propiedad:
@@ -92,6 +94,8 @@ const NewReserva = ({updateData}) => {
                 <button type="submit">Enviar Reserva</button>
             </form>
             {mensaje && <p>{mensaje}</p>}
+            <button type="button" id="volver"><a href="http://localhost:3000/reserva">Volver</a></button>
+            <FooterComponent/>
         </div>
     );
 };

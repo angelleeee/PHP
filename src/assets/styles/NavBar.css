@@ -30,6 +30,6 @@ nav ul li{
 nav ul li:hover{
     color:blue;
     cursor: pointer;
-    transform: translateY(20px);
+    transform: translateY(10px);
 }
 

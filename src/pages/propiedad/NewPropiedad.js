@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import '../../assets/styles/NewPropiedad.css'
+import FooterComponent from '../../components/FooterComponent';
+import Header from '../../components/HeaderComponent';
 
 const NewPropiedad = () => {
   const [formData, setFormData] = useState({
@@ -75,174 +77,123 @@ const NewPropiedad = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} encType="multipart/form-data">
-      <div>
-        <label>
-          Domicilio:
-          <input
-            type="text"
-            name="domicilio"
-            value={formData.domicilio}
-            onChange={handleChange}
-          />
-        </label>
-        {errors.domicilio && <p style={{ color: 'red' }}>{errors.domicilio}</p>}
-      </div>
+    <div>
+      <Header/>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
+        <div>
+          <label>
+            Domicilio:
+            <input type="text" name="domicilio" value={formData.domicilio} onChange={handleChange}/>
+          </label>
+          {errors.domicilio && <p style={{ color: 'red' }}>{errors.domicilio}</p>}
+        </div>
 
-      <div>
-        <label>
-          Localidad:
-          <select
-            name="localidad"
-            value={formData.localidad}
-            onChange={handleChange}
-          >
-            <option value="">Seleccione una localidad</option>
-            {localidades.map((loc, index) => (
-              <option key={index} value={loc}>
-                {loc}
+        <div>
+          <label>
+            Localidad:
+            <select name="localidad" value={formData.localidad} onChange={handleChange}>
+              <option value="">Seleccione una localidad</option>
+                {localidades.map((loc, index) => (
+                  <option key={index} value={loc}>
+                  {loc}
               </option>
-            ))}
-          </select>
-        </label>
-        {errors.localidad && <p style={{ color: 'red' }}>{errors.localidad}</p>}
-      </div>
+              ))}
+            </select>
+          </label>
+          {errors.localidad && <p style={{ color: 'red' }}>{errors.localidad}</p>}
+        </div>
 
-      <div>
-        <label>
-          Cantidad de Habitaciones:
-          <input
-            type="text"
-            name="cantidadHabitaciones"
-            value={formData.cantidadHabitaciones}
-            onChange={handleChange}
-          />
-        </label>
-        {errors.cantidadHabitaciones && <p style={{ color: 'red' }}>{errors.cantidadHabitaciones}</p>}
-      </div>
+        <div>
+          <label>
+            Cantidad de Habitaciones:
+            <input type="text" name="cantidadHabitaciones" value={formData.cantidadHabitaciones} onChange={handleChange}/>
+          </label>
+          {errors.cantidadHabitaciones && <p style={{ color: 'red' }}>{errors.cantidadHabitaciones}</p>}
+        </div>
 
-      <div>
-        <label>
-          Cantidad de Baños:
-          <input
-            type="text"
-            name="cantidadBanios"
-            value={formData.cantidadBanios}
-            onChange={handleChange}
-          />
-        </label>
-        {errors.cantidadBanios && <p style={{ color: 'red' }}>{errors.cantidadBanios}</p>}
-      </div>
+        <div>
+          <label>
+            Cantidad de Baños:
+            <input type="text" name="cantidadBanios" value={formData.cantidadBanios} onChange={handleChange}/>
+          </label>
+          {errors.cantidadBanios && <p style={{ color: 'red' }}>{errors.cantidadBanios}</p>}
+        </div>
 
-      <div>
-        <label>
-          Cochera:
-          <input
-            type="checkbox"
-            name="cochera"
-            checked={formData.cochera}
-            onChange={handleChange}
-          />
-        </label>
-      </div>
+        <div>
+          <label>
+            Cochera:
+            <input type="checkbox" name="cochera" checked={formData.cochera} onChange={handleChange}/>
+          </label>
+        </div>
 
-      <div>
-        <label>
-          Cantidad de Huéspedes:
-          <input
-            type="text"
-            name="cantidadHuespedes"
-            value={formData.cantidadHuespedes}
-            onChange={handleChange}
-          />
-        </label>
-        {errors.cantidadHuespedes && <p style={{ color: 'red' }}>{errors.cantidadHuespedes}</p>}
-      </div>
+        <div>
+          <label>
+            Cantidad de Huéspedes:
+            <input type="text" name="cantidadHuespedes" value={formData.cantidadHuespedes} onChange={handleChange}/>
+          </label>
+          {errors.cantidadHuespedes && <p style={{ color: 'red' }}>{errors.cantidadHuespedes}</p>}
+        </div>
 
-      <div>
-        <label>
-          Fecha de Inicio de Disponibilidad:
-          <input
-            type="date"
-            name="fechaInicioDisponibilidad"
-            value={formData.fechaInicioDisponibilidad}
-            onChange={handleChange}
-          />
-        </label>
-        {errors.fechaInicioDisponibilidad && <p style={{ color: 'red' }}>{errors.fechaInicioDisponibilidad}</p>}
-      </div>
+        <div>
+          <label>
+            Fecha de Inicio de Disponibilidad:
+            <input type="date" name="fechaInicioDisponibilidad" value={formData.fechaInicioDisponibilidad} onChange={handleChange}/>
+          </label>
+          {errors.fechaInicioDisponibilidad && <p style={{ color: 'red' }}>{errors.fechaInicioDisponibilidad}</p>}
+        </div>
 
-      <div>
-        <label>
-          Cantidad de Días:
-          <input
-            type="text"
-            name="cantidadDias"
-            value={formData.cantidadDias}
-            onChange={handleChange}
-          />
-        </label>
-        {errors.cantidadDias && <p style={{ color: 'red' }}>{errors.cantidadDias}</p>}
-      </div>
+        <div>
+          <label>
+            Cantidad de Días:
+            <input type="text" name="cantidadDias" value={formData.cantidadDias} onChange={handleChange}/>
+          </label>
+          {errors.cantidadDias && <p style={{ color: 'red' }}>{errors.cantidadDias}</p>}
+        </div>
 
-      <div>
-        <label>
-          Disponible:
-          <input
-            type="checkbox"
-            name="disponible"
-            checked={formData.disponible}
-            onChange={handleChange}
-          />
-        </label>
-      </div>
+        <div>
+          <label>
+            Disponible:
+            <input type="checkbox" name="disponible" checked={formData.disponible} onChange={handleChange}/>
+          </label>
+        </div>
 
-      <div>
-        <label>
+        <div>
+          <label>
           Valor por Noche:
-          <input
-            type="text"
-            name="valorNoche"
-            value={formData.valorNoche}
-            onChange={handleChange}
-          />
-        </label>
-        {errors.valorNoche && <p style={{ color: 'red' }}>{errors.valorNoche}</p>}
-      </div>
+          <input type="text" name="valorNoche" value={formData.valorNoche} onChange={handleChange}/>
+          </label>
+          {errors.valorNoche && <p style={{ color: 'red' }}>{errors.valorNoche}</p>}
+        </div>
 
-      <div>
-        <label>
-          Tipo de Propiedad:
-          <select
-            name="tipoPropiedad"
-            value={formData.tipoPropiedad}
-            onChange={handleChange}
-          >
-            <option value="">Seleccione un tipo de propiedad</option>
-            {tiposPropiedad.map((tipo, index) => (
-              <option key={index} value={tipo}>
-                {tipo}
-              </option>
-            ))}
-          </select>
-        </label>
-        {errors.tipoPropiedad && <p style={{ color: 'red' }}>{errors.tipoPropiedad}</p>}
-      </div>
+        <div>
+          <label>
+            Tipo de Propiedad:
+            <select name="tipoPropiedad" value={formData.tipoPropiedad} onChange={handleChange}>
+              <option value="">Seleccione un tipo de propiedad</option>
+              {tiposPropiedad.map((tipo, index) => (
+                <option key={index} value={tipo}>
+                  {tipo}
+                </option>
+              ))}
+            </select>
+          </label>
+          {errors.tipoPropiedad && <p style={{ color: 'red' }}>{errors.tipoPropiedad}</p>}
+        </div>
 
-      <div>
-        <label>
-          Imagen:
-          <input
-            type="file"
-            name="imagen"
-            onChange={handleChange}
-          />
-        </label>
-        {errors.imagen && <p style={{ color: 'red' }}>{errors.imagen}</p>}
-      </div>
+        <div>
+          <label>
+            Imagen:
+            <input type="file" name="imagen" onChange={handleChange}/>
+          </label>
+          {errors.imagen && <p style={{ color: 'red' }}>{errors.imagen}</p>}
+        </div>
+        <button type="submit">Enviar</button>
 
-      <button type="submit">Enviar</button>
-    </form>
+      </form>
+      <button type="button" id="volver"><a href="http://localhost:3000">Volver</a></button>
+
+      <FooterComponent/>
+    </div>
   );
 };
 

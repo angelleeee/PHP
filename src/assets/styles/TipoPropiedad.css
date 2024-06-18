@@ -14,8 +14,11 @@
     
 }
 
-  
-.li button{    
+.li button a{
+    text-decoration: none;
+    color: inherit; 
+}
+.li button {    
     position: absolute;
     translate: 227px 0px;
     border-radius: 8px;
@@ -23,9 +26,17 @@
     border-color: antiquewhite;
     margin-right: 10px;
     cursor: pointer;
-    
 }
 .boton-eliminar{
     margin-left: 55px;
 } 
 
+#nuevo{
+    text-decoration: none;
+    color: inherit;    
+    color: black;
+    border-radius: 8px;
+    width: 10%;
+    padding: auto;
+    margin-left: 40px;
+}

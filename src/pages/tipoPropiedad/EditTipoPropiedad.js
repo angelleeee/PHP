@@ -1,9 +1,18 @@
 
-import React, { useState } from 'react';
+import Header from '../../components/HeaderComponent'
+import React, { useState } from 'react'
+import FooterComponent from '../../components/FooterComponent'
 
 
-const EditTipoPropiedad = (updateData,  createItem, values, select, setShowDelete, setCurrentValue, setShowSelect) =>{
+const EditTipoPropiedad = (item) =>{
    
+    const [data, setData] = useState([]);
+    function loadData (){
+        fetch('http://localhost:80/tipos_propiedad')
+        .then(response => response.json())
+        .then(data => setData(data.data)) .catch(error => console.error('Error fetching data:', error)); 
+    }
+    const [currentValue, setCurrentValue] = useState("");
     function handleUpdate(id, updatedData){
         fetch(`http://localhost:80/tipos_propiedad/${id}`,  {
             method: 'PUT',
@@ -12,9 +21,7 @@ const EditTipoPropiedad = (updateData,  createItem, values, select, setShowDelet
             },
             body: JSON.stringify(updatedData),
         })
-        .then(() => updateData())
-        .then(()=>setShowDelete(true))
-        .then(()=>setShowSelect(false))
+        .then(() => loadData())
         .catch(error => console.error('Error fetching data:', error));
     }
     
@@ -22,14 +29,15 @@ const EditTipoPropiedad = (updateData,  createItem, values, select, setShowDelet
     setCurrentValue(e.target.value);
     
     }
-    
-    
-   
-    
     return(
         <div>
-            {select && <input className="input_edit" type="text"  value={values}  onChange={(e) => handleInputChange(e)}/>}
-            {select && <button className="boton" onClick={() => handleUpdate(createItem.id, { nombre: values })} >Confirmar</button>}
+            <Header/>
+            <form>
+                <input className="input_edit" type="text"  value={currentValue}  onChange={(e) => handleInputChange(e)}/>
+                <button className="boton" onClick={() => handleUpdate(item.id, { nombre: currentValue })} >Confirmar</button>
+            </form>
+            <button type="button" id="volver"><a href="http://localhost:3000/tipo_propiedad">Volver</a></button>
+            <FooterComponent/>
         </div>
     )
 }

@@ -1,29 +1,21 @@
     import React, { useState } from 'react';
-    //import "../../assets/styles/NewTipoPropiedad.css"
+    import Header from '../../components/HeaderComponent';
+   
+    import FooterComponent from '../../components/FooterComponent';
+    import "../../assets/styles/NewTipoPropiedad.css"
 
-    const NewTipoPropiedad = ({updateData}) => {
+    const NewTipoPropiedad = () => {
 
-    const [showInput, setShowInput] = useState(false);
-
-    // Función para manejar el evento de clic del botón
-    const handleButtonClick = () => {
-        setShowInput(true);
-    };
-    const cerrar = () =>{
-        setShowInput(false);
-    }
-
-    
     const [message, setMessage] = useState('');
     const [nombre, setNombre] = useState('');
 
 
     const handleSubmit = (event) => {
         event.preventDefault();
-  
-    
         const data = { nombre };
-    
+        if (!nombre) {
+          alert('El campo no puede estar vacío.')
+        }
         fetch('http://localhost:80/tipos_propiedad', {
           method: 'POST',
           headers: {
@@ -32,41 +24,21 @@
           body: JSON.stringify(data),
         })
         .then((response) => response.json())
-        .then((data) => {
-          if (data.status === "error") {
-            throw new Error(data.message);
-          }
-          setMessage(data.message);
-          setNombre(''); // Limpiar el campo de entrada después de un envío exitoso
-        })
-        .then(() => cerrar())
-        .then(() => updateData())
         .catch((error) => {
           console.log('Error:', error);
-
-          if (!nombre) {
-            alert('El nombre no puede estar vacío.')
-          }else{
-            alert('El tipo de propiedad no puede repetirse')
-          }
-
         });
       };
   return (
     <div>
-    
-    <form onSubmit={handleSubmit}>
-      <div>
-        
-        {showInput && <input
-          type="text"
-          id="nombre"   
-          value={nombre}
-          onChange={(e) => setNombre(e.target.value)}
-        />}
-      </div>
-      {showInput && <button type="submit" >Crear</button>}
-    </form>
+      <Header/>
+      <form onSubmit={handleSubmit}>
+        <div>
+           <input type="text" id="nombre" value={nombre} onChange={(e) => setNombre(e.target.value)}/>
+        </div>
+        <button type="submit" id='crear' >Crear</button>
+      </form>
+      <button type="button" id="volver"><a href="http://localhost:3000/tipo_propiedad">Volver</a></button>
+      <FooterComponent/>
   </div>
   );
 };
