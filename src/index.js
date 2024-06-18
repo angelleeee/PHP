@@ -12,6 +12,7 @@ import NewReserva from './pages/reserva/NewReserva';
 import EditReserva from './pages/reserva/EditReserva';
 import NewPropiedad from './pages/propiedad/NewPropiedad';
 import EditPropiedad from './pages/propiedad/EditPropiedad';
+import DetailPropiedad from './pages/propiedad/DetailPropiedad';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -26,6 +27,7 @@ root.render(
         <Route path="/reserva/editar" element={<EditReserva/>}/>
         <Route path="/crear" element={<NewPropiedad/>}/>
         <Route path="/editar" element={<EditPropiedad/>}/>
+        <Route path="/detalle" element={<DetailPropiedad/>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

@@ -41,7 +41,7 @@ function Reserva(){
     }
 
     function handleDelete(id) {
-        if(window.confirm("Estas seguro que queres elimiar este tipo de propiedad")){
+        if(window.confirm("Estas seguro que queres eliminar esta reserva?")){
             fetch(`http://localhost:80/reservas/${id}`,  {
                 method: 'DELETE',
             })

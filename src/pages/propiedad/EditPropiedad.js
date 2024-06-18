@@ -63,7 +63,7 @@ const EditPropiedad =()=>{
                     Cantidad de Huespedes:
                     <input type="number" />
                 </div>
-                <button type="submit">Enviar</button>
+                <button type="submit">Enviar</button>   
             </form>
             
 

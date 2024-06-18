@@ -78,12 +78,13 @@ function Propiedad(){
     };
     /*-----------------------------------------------*/ 
     function handleDelete(id) {
-        if(window.confirm("Estas seguro que queres elimiar este tipo de propiedad")){
+        if(window.confirm("Estas seguro que queres eliminar esta propiedad?")){
             fetch(`http://localhost:80/propiedades/${id}`,  {
                 method: 'DELETE',
             }).then(() => loadData()).catch(error => console.error('Error fetching data:', error));
         }         
     }
+    
     return(
         <div>
             <HeaderComponent/>
@@ -125,7 +126,8 @@ function Propiedad(){
                         Valor Noche:{item.valor_noche}<br/>
                         Cantidad de Huespedes: {item.cantidad_huespedes}<br/>
                         <button type="boton" className="boton"><a href="http://localhost:3000/editar" >Editar</a></button>
-                        <button className="boton-eliminar" onClick={() => handleDelete(item.id)}>Eliminar</button>
+                        <button className="boton-eliminarP" onClick={() => handleDelete(item.id)}>Eliminar</button>
+                        <button className="boton-detalle" ><a href="http://localhost:3000/detalle" >Detalles</a></button>
                     </li> ))
                 }
              </ul>

@@ -19,7 +19,7 @@ function TipoPropiedad(){
     }
 
     function handleDelete(id) {
-        if(window.confirm("Estas seguro que queres elimiar este tipo de propiedad")){
+        if(window.confirm("Estas seguro que queres eliminar este tipo de propiedad")){
             fetch(`http://localhost:80/tipos_propiedad/${id}`,  {
                 method: 'DELETE',
             }).then(() => loadData()).catch(error => console.error('Error fetching data:', error));
@@ -34,7 +34,7 @@ function TipoPropiedad(){
                     <li key={item.id} className="li">
                         {item.nombre} 
                         <button type="boton" className="boton"><a href="http://localhost:3000/tipo_propiedad/editar" >Editar</a></button>
-                        <button className="boton-eliminar" onClick={() => handleDelete(item.id)}>Eliminar</button>
+                        <button className="boton-eliminarT" onClick={() => handleDelete(item.id)}>Eliminar</button>
                     </li>
                      ))
                 }

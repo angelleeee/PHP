@@ -12,7 +12,7 @@
 }
 
   
-.li button{    
+.li button {    
     font-size: 15px;
     position: absolute;
     translate: 300px 0px;
@@ -21,8 +21,11 @@
     border-color: antiquewhite;
     margin-right: 10px;
     cursor: pointer;
-    
 }
-.boton-eliminar{
-    margin-left: 55px;
+
+.boton-eliminarP{
+    margin-top: 75px;
 } 
+.boton-detalle{
+    margin-top: 35px;
+}
