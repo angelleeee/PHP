@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+
 import '../../assets/styles/NewPropiedad.css'
 import FooterComponent from '../../components/FooterComponent';
 import Header from '../../components/HeaderComponent';
+import { useEffect,useState } from 'react';
+
 
 const NewPropiedad = () => {
   const [formData, setFormData] = useState({
@@ -20,9 +22,14 @@ const NewPropiedad = () => {
   });
 
   const [errors, setErrors] = useState({});
-  const localidades = ['Localidad 1', 'Localidad 2', 'Localidad 3'];
   const tiposPropiedad = ['Casa', 'Departamento', 'Cabaña'];
+  const [localidades,setLocalidades] = useState([]);
 
+  useEffect(() => { 
+      fetch('http://localhost:80/localidades')
+      .then(response => response.json())
+      .then(localidades => setLocalidades(localidades.data)) .catch(error => console.error('Error fetching data:', error)); 
+  }, []);
   const validate = () => {
     const newErrors = {};
 
@@ -93,9 +100,9 @@ const NewPropiedad = () => {
             Localidad:
             <select name="localidad" value={formData.localidad} onChange={handleChange}>
               <option value="">Seleccione una localidad</option>
-                {localidades.map((loc, index) => (
-                  <option key={index} value={loc}>
-                  {loc}
+                {localidades.map(localidades => (
+                  <option key={localidades.id} value={localidades.id}>
+                  {localidades.nombre}
               </option>
               ))}
             </select>
