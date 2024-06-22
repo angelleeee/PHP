@@ -1,46 +1,59 @@
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import Header from '../../components/HeaderComponent';
+import FooterComponent from '../../components/FooterComponent';
+import "../../assets/styles/NewTipoPropiedad.css";
 
-import Header from '../../components/HeaderComponent'
-import React, { useState } from 'react'
-import FooterComponent from '../../components/FooterComponent'
-
-
-const EditTipoPropiedad = (item) =>{
-   
+const EditTipoPropiedad = () => {
+    const { id } = useParams();
     const [data, setData] = useState([]);
-    function loadData (){
-        fetch('http://localhost:80/tipos_propiedad')
-        .then(response => response.json())
-        .then(data => setData(data.data)) .catch(error => console.error('Error fetching data:', error)); 
-    }
     const [currentValue, setCurrentValue] = useState("");
-    function handleUpdate(id, updatedData){
-        fetch(`http://localhost:80/tipos_propiedad/${id}`,  {
+
+    const loadData = () => {
+        fetch('http://localhost:80/tipos_propiedad')
+            .then(response => response.json())
+            .then(data => setData(data.data))
+            .catch(error => console.error('Error fetching data:', error));
+    };
+
+    useEffect(() => {
+        loadData();
+    }, []);
+
+    const nombreLocalidad = (id) => {
+        const loc = data.find(item => item.id === id);
+        return loc ? loc.nombre : 'Localidad no encontrada';
+    };
+
+    const handleUpdate = (id, updatedData) => {
+        fetch(`http://localhost:80/tipos_propiedad/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(updatedData),
         })
-        .then(() => loadData())
-        .catch(error => console.error('Error fetching data:', error));
-    }
-    
+            .then(() => loadData())
+            .catch(error => console.error('Error updating data:', error));
+    };
+
     const handleInputChange = (e) => {
-    setCurrentValue(e.target.value);
-    
-    }
-    return(
+        setCurrentValue(e.target.value);
+    };
+
+    return (
         <div>
             <Header/>
             <form>
-                <input className="input_edit" type="text"  value={currentValue}  onChange={(e) => handleInputChange(e)}/>
-                <button className="boton" onClick={() => handleUpdate(item.id, { nombre: currentValue })} >Confirmar</button>
+                <input className="input_edit" type="text" value={currentValue || nombreLocalidad(id)} onChange={handleInputChange}/>
+                <button type="button" className="boton" onClick={() => handleUpdate(id, { nombre: currentValue })}>Confirmar</button>
             </form>
-            <button type="button" id="volver"><a href="http://localhost:3000/tipo_propiedad">Volver</a></button>
-            <FooterComponent/>
+            <button type="button" id="volver">
+                <a href="http://localhost:3000/tipos_propiedad">Volver</a>
+            </button>
+            <FooterComponent />
         </div>
-    )
+    );
 }
 
-
-export default EditTipoPropiedad
+export default EditTipoPropiedad;

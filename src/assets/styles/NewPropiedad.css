@@ -1,7 +1,9 @@
 
 
 form {
-  margin: auto;
+  margin-top:110px;
+  margin-left: 33%;
+  margin-bottom: 120px;
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
@@ -25,12 +27,16 @@ form input[type="text"],
 form input[type="date"],
 form input[type="file"],
 form select {
-  width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  display: flex;
+    box-sizing: content-box;
+    border: 3px solid #0a0000;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    width: 95%;
+    border-color: antiquewhite;
+    margin-left: 0%;
+    padding: 10px;
 }
 
 form input[type="checkbox"] {

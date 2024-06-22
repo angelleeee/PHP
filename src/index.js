@@ -13,16 +13,18 @@ import EditReserva from './pages/reserva/EditReserva';
 import NewPropiedad from './pages/propiedad/NewPropiedad';
 import EditPropiedad from './pages/propiedad/EditPropiedad';
 import DetailPropiedad from './pages/propiedad/DetailPropiedad';
+///<Route path="/tipos_propiedad/editar" element={<EditTipoPropiedad/>}/>
+///<Route path="/tipos_propiedad/editar/:id" component={<EditTipoPropiedad/>}/>
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/tipo_propiedad" element={<TipoPropiedadPage/>}/>
+        <Route path="/tipos_propiedad" element={<TipoPropiedadPage/>}/>
+        <Route path="/tipos_propiedad/editar/:id" element={<EditTipoPropiedad/>}/>
+        <Route path="/tipos_propiedad/crear" element={<NewTipoPropiedad/>}/>
         <Route path="/reserva" element={<Reserva/>}/>
         <Route path="/" element={<Propiedad/>}/>
-        <Route path="tipo_propiedad/crear" element={<NewTipoPropiedad/>}/>
-        <Route path="/tipo_propiedad/editar" element={<EditTipoPropiedad/>}/>
         <Route path="/reserva/crear" element={<NewReserva/>}/>
         <Route path="/reserva/editar" element={<EditReserva/>}/>
         <Route path="/crear" element={<NewPropiedad/>}/>

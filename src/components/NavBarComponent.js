@@ -5,7 +5,7 @@ function NavBarComponent(){
         <nav id='lista'> 
             <ul>
                 <li>
-                    <a href='http://localhost:3000/tipo_propiedad' >TIPO PROPIEDAD</a>
+                    <a href='http://localhost:3000/tipos_propiedad' >TIPO PROPIEDAD</a>
                 </li>
             </ul>
             <ul>

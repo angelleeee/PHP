@@ -7,7 +7,7 @@ const Header = () => {
     const location = useLocation();
     const getPageName = () =>{
         switch(location.pathname){
-            case '/tipo_propiedad':
+            case '/tipos_propiedad':
                 return 'Tipo de propiedades';
             case '/reserva':
                 return 'Reservas'
@@ -15,9 +15,9 @@ const Header = () => {
                 return 'Propiedades-Lee';
             case '/propiedad':
                 return 'Propiedades';
-            case '/tipo_propiedad/editar':
+            case '/tipos_propiedad/editar':
                 return 'Editar tipo de propiedad';
-            case '/tipo_propiedad/crear':
+            case '/tipos_propiedad/crear':
                 return 'Crear tipo propiedad';
             case '/reserva/editar':
                 return 'Editar';
@@ -34,7 +34,7 @@ const Header = () => {
 
     const getImageSrc = () =>{
         switch(location.pathname){
-            case '/tipo_propiedad':
+            case '/tipos_propiedad':
                 return imagenes.Logo;
             case'/':
                 return imagenes.Logo;

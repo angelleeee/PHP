@@ -3,6 +3,7 @@ import FooterComponent from "../../components/FooterComponent"
 import '../../assets/styles/TipoPropiedad.css'
 import React,{useState, useEffect} from "react";
 
+
 function TipoPropiedad(){
     const [data, setData] = useState([]);
     ///const [currentValue, setCurrentValue] = useState("");
@@ -15,7 +16,7 @@ function TipoPropiedad(){
     function loadData (){
         fetch('http://localhost:80/tipos_propiedad')
         .then(response => response.json())
-        .then(data => setData(data.data)) .catch(error => console.error('Error fetching data:', error)); 
+        .then(data => setData(data.data)).catch(error => console.error('Error fetching data:', error)); 
     }
 
     function handleDelete(id) {
@@ -25,21 +26,24 @@ function TipoPropiedad(){
             }).then(() => loadData()).catch(error => console.error('Error fetching data:', error));
         }
     }
+    const handleEdit = (id) => {
+        window.location.href = `/tipos_propiedad/editar/${id}`;
+    };
 
         return(
             <div>
             <HeaderComponent />
-            <ul > 
+            <ul> 
                 {data.map(item => ( 
                     <li key={item.id} className="li">
                         {item.nombre} 
-                        <button type="boton" className="boton"><a href="http://localhost:3000/tipo_propiedad/editar" >Editar</a></button>
+                        <button type="boton" className="boton" onClick={() => handleEdit(item.id)}>Editar</button>
                         <button className="boton-eliminar" onClick={() => handleDelete(item.id)}>Eliminar</button>
                     </li>
                      ))
                 }
              </ul>
-             <button type="boton" id="nuevo" className="boton"><a href="http://localhost:3000/tipo_propiedad/crear">Crear Nuevo tipo de propiedad</a></button>
+             <button type="boton" id="nuevo" className="boton"><a href="http://localhost:3000/tipos_propiedad/crear">Crear Nuevo tipo de propiedad</a></button>
             <FooterComponent/>
         </div>
     )

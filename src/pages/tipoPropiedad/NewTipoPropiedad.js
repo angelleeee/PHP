@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Header from '../../components/HeaderComponent';
 import FooterComponent from '../../components/FooterComponent';
 import "../../assets/styles/NewTipoPropiedad.css"
@@ -48,7 +48,7 @@ const NewTipoPropiedad = () => {
           </div>
           <button type="submit" id='crear'>Crear</button>
         </form>
-        <button type="button" id="volver"><a href="http://localhost:3000/tipo_propiedad">Volver</a></button>
+        <button type="button" id="volver"><a href="http://localhost:3000/tipos_propiedad">Volver</a></button>
       <FooterComponent/>
     </div>
   );
