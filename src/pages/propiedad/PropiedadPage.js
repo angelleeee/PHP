@@ -88,7 +88,7 @@ function Propiedad(){
     return(
         <div>
             <HeaderComponent/>
-            <form onSubmit={handleSubmit}>
+            <form id="filtro" onSubmit={handleSubmit}>
             <label htmlFor="available">
                 Disponible:
                 <input type="checkbox" name="available" checked={formData.disponible} onChange={handleChange}/>
@@ -116,6 +116,7 @@ function Propiedad(){
 
             <button type="submit">Filtrar</button>
             </form>
+            
             <ul > 
                 {data.map(item => ( 
                     <li key={item.id} className="li">

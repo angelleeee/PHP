@@ -34,7 +34,7 @@ function TipoPropiedad(){
                     <li key={item.id} className="li">
                         {item.nombre} 
                         <button type="boton" className="boton"><a href="http://localhost:3000/tipo_propiedad/editar" >Editar</a></button>
-                        <button className="boton-eliminarT" onClick={() => handleDelete(item.id)}>Eliminar</button>
+                        <button className="boton-eliminar" onClick={() => handleDelete(item.id)}>Eliminar</button>
                     </li>
                      ))
                 }

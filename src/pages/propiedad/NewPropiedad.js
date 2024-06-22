@@ -1,9 +1,8 @@
 
-import '../../assets/styles/NewPropiedad.css'
 import FooterComponent from '../../components/FooterComponent';
 import Header from '../../components/HeaderComponent';
 import { useEffect,useState } from 'react';
-
+import '../../assets/styles/NewPropiedad.css'
 
 const NewPropiedad = () => {
   const [formData, setFormData] = useState({

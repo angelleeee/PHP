@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Header from '../../components/HeaderComponent';
 import FooterComponent from '../../components/FooterComponent';
 
-const NewReserva = ({updateData}) => {
+const NewReserva = () => {
     const [propiedades, setPropiedades] = useState([]);
     const [inquilinos, setInquilinos] = useState([]);
     const [formData, setFormData] = useState([
-        { name: 'propiedad', value: '' },
-        { name: 'inquilino', value: '' },
-        { name: 'fechaDesde', value: '' },
-        { name: 'cantidadNoches', value: '' },
+        { name: 'propiedad_id', value: '' },
+        { name: 'inquilino_id', value: '' },
+        { name: 'fecha_desde', value: '' },
+        { name: 'cantidad_noches', value: '' },
         { name: 'valorTotal', value: '' }
     ]);
 
@@ -47,7 +47,6 @@ const NewReserva = ({updateData}) => {
             body: JSON.stringify(formData)
         })
             .then(response => response.json())
-            .then(() => updateData())
             .then(data => setMensaje(data.message))
             .catch(error => console.error('Error submitting form:', error));
     };
@@ -58,7 +57,7 @@ const NewReserva = ({updateData}) => {
             <form onSubmit={handleSubmit}>
                 <label>
                     Propiedad:
-                    <select name="propiedad" value={formData.propiedad} onChange={handleChange} required>
+                    <select name="propiedad_id" value={formData.propiedad_id} onChange={handleChange} required>
                         <option value="">Selecciona una propiedad</option>
                         {propiedades.map(propiedad => (
                             <option key={propiedad.id} value={propiedad.id}>{propiedad.domicilio}</option>
@@ -68,7 +67,7 @@ const NewReserva = ({updateData}) => {
                 <br />
                 <label>
                     Inquilino:
-                    <select name="inquilino" value={formData.inquilino} onChange={handleChange} required>
+                    <select name="inquilino_id" value={formData.inquilino_id} onChange={handleChange} required>
                         <option value="">Selecciona un inquilino</option>
                         {inquilinos.map(inquilino => (
                             <option key={inquilino.id} value={inquilino.id}>{inquilino.nombre}</option>
@@ -78,12 +77,12 @@ const NewReserva = ({updateData}) => {
                 <br />
                 <label>
                     Fecha Desde:
-                    <input type="date" name="fechaDesde" value={formData.fechaDesde} onChange={handleChange} required />
+                    <input type="date" name="fecha_desde" value={formData.fecha_desde} onChange={handleChange} required />
                 </label>
                 <br />
                 <label>
                     Cantidad Noches:
-                    <input type="number" name="cantidadNoches" value={formData.cantidadNoches} onChange={handleChange} required />
+                    <input type="number" name="cantidad_noches" value={formData.cantidad_noches} onChange={handleChange} required />
                 </label>
                 <br />
                 <label>
