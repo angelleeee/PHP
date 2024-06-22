@@ -5,7 +5,7 @@ import FooterComponent from '../../components/FooterComponent';
 import "../../assets/styles/NewTipoPropiedad.css";
 
 const EditTipoPropiedad = () => {
-    const { id } = useParams();
+    const { id } = useParams(); // Asegúrate de que 'id' es el nombre correcto del parámetro en la URL
     const [data, setData] = useState([]);
     const [currentValue, setCurrentValue] = useState("");
 
@@ -20,8 +20,16 @@ const EditTipoPropiedad = () => {
         loadData();
     }, []);
 
+    useEffect(() => {
+        // Inicializa currentValue una vez que los datos se hayan cargado
+        if (data.length > 0) {
+            const initialValue = nombreLocalidad(id);
+            setCurrentValue(initialValue);
+        }
+    }, [data, id]);
+
     const nombreLocalidad = (id) => {
-        const loc = data.find(item => item.id === id);
+        const loc = data.find(item => item.id === parseInt(id)); 
         return loc ? loc.nombre : 'Localidad no encontrada';
     };
 
