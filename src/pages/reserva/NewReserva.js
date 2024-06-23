@@ -14,10 +14,7 @@ const NewReserva = () => {
     ]);
 
     const [mensaje, setMensaje] = useState('');
-    const getFieldValue = (name) => {
-        const field = formData.find(field => field.name === name);
-        return field ? field.value : '';
-    };
+
     useEffect(() => {
         // Aquí realiza la solicitud al backend para obtener la lista de propiedades
         fetch('http://localhost:80/propiedades')

@@ -13,6 +13,7 @@ const NewTipoPropiedad = () => {
       alert('El campo no puede estar vacío.');
       return;
     }
+    
   fetch('http://localhost:80/tipos_propiedad', {
     method: 'POST',
     headers: {
@@ -34,7 +35,7 @@ const NewTipoPropiedad = () => {
     })
     .catch(error => {
       console.error('Error:', error);
-      setMensaje('El tipo de propiedad no puede repetirse'); // Mensaje genérico de error
+      setMensaje('El tipo de propiedad no puede repetirse'); 
     });
   };
 

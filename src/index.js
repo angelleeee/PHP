@@ -24,13 +24,13 @@ root.render(
         <Route path="/tipos_propiedad/editar/:id" element={<EditTipoPropiedad/>}/>
         <Route path="/tipos_propiedad/crear" element={<NewTipoPropiedad/>}/>
         <Route path="/reserva" element={<Reserva/>}/>
-        <Route path="/" element={<Propiedad/>}/>
         <Route path="/reserva/crear" element={<NewReserva/>}/>
-        <Route path="/reserva/editar" element={<EditReserva/>}/>
+        <Route path="/reserva/editar/:id" element={<EditReserva/>}/>
+        <Route path="/" element={<Propiedad/>}/>
         <Route path="/crear" element={<NewPropiedad/>}/>
         <Route path="/editar" element={<EditPropiedad/>}/>
         <Route path="/detalle" element={<DetailPropiedad/>}/>
-      </Routes>
+      </Routes> 
     </BrowserRouter>
   </React.StrictMode>
 );

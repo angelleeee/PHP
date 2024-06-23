@@ -49,6 +49,9 @@ function Reserva(){
             .catch(error => console.error('Error fetching data:', error));
         }         
     }
+    const handleEdit = (id) => {
+        window.location.href = `/reserva/editar/${id}`;
+    };
 
     return(
         <div>
@@ -61,7 +64,7 @@ function Reserva(){
                         Fecha desde: {item.fecha_desde}<br/>
                         Cantidad de noches: {item.cantidad_noches}<br/>
                         Valor total: {item.valor_total}<br/>
-                        <button type="boton" className="boton"><a href="http://localhost:3000/reserva/editar" >Editar</a></button>
+                        <button type="boton" className="boton" onClick={() => handleEdit(item.id)}>Editar</button>
                         <button className="boton-eliminar" onClick={() => handleDelete(item.id)}>Eliminar</button>
                     </li> ))
                 }

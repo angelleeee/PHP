@@ -1,17 +1,16 @@
-import HeaderComponent from "../../components/HeaderComponent"
-import FooterComponent from "../../components/FooterComponent"
-import '../../assets/styles/TipoPropiedad.css'
-import React,{useState, useEffect} from "react";
 
+import HeaderComponent from "../../components/HeaderComponent";
+import FooterComponent from "../../components/FooterComponent";
+import '../../assets/styles/TipoPropiedad.css';
+import React, { useState, useEffect } from "react";
 
-function TipoPropiedad(){
+function TipoPropiedad() {
     const [data, setData] = useState([]);
-    ///const [currentValue, setCurrentValue] = useState("");
+    const [error, setError] = useState(""); // Estado para guardar el mensaje de error
 
     useEffect(() => { 
         loadData();
     }, []);
-
 
     function loadData (){
         fetch('http://localhost:80/tipos_propiedad')
@@ -20,34 +19,47 @@ function TipoPropiedad(){
     }
 
     function handleDelete(id) {
-        if(window.confirm("Estas seguro que queres eliminar este tipo de propiedad")){
-            fetch(`http://localhost:80/tipos_propiedad/${id}`,  {
+        if (window.confirm("Estas seguro que queres eliminar este tipo de propiedad")) {
+            fetch(`http://localhost:80/tipos_propiedad/${id}`, {
                 method: 'DELETE',
-            }).then(() => loadData()).catch(error => console.error('Error fetching data:', error));
+            })
+            .then(error => {
+                if (error) {
+                    throw new Error(`El tipo de propiedad está asociado a una propiedad`);
+                }
+                return error.json();
+            })
+            .then(() => loadData())
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                setError(error.message); 
+            });
         }
     }
+
     const handleEdit = (id) => {
         window.location.href = `/tipos_propiedad/editar/${id}`;
     };
 
-        return(
-            <div>
+    return (
+        <div>
             <HeaderComponent />
-            <ul> 
-                {data.map(item => ( 
+            <ul>
+            {error && <div className="error-message">{error}</div>} 
+                {data.map(item => (
                     <li key={item.id} className="li">
-                        {item.nombre} 
-                        <button type="boton" className="boton" onClick={() => handleEdit(item.id)}>Editar</button>
+                        {item.nombre}
+                        <button type="button" className="boton" onClick={() => handleEdit(item.id)}>Editar</button>
                         <button className="boton-eliminar" onClick={() => handleDelete(item.id)}>Eliminar</button>
                     </li>
-                     ))
-                }
-             </ul>
-             <button type="boton" id="nuevo" className="boton"><a href="http://localhost:3000/tipos_propiedad/crear">Crear Nuevo tipo de propiedad</a></button>
-            <FooterComponent/>
+                ))}
+            </ul>
+            <button type="button" id="nuevo" className="boton">
+                <a href="http://localhost:3000/tipos_propiedad/crear">Crear Nuevo tipo de propiedad</a>
+            </button>
+            <FooterComponent />
         </div>
-    )
+    );
 }
-
 
 export default TipoPropiedad
