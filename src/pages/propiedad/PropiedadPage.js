@@ -84,17 +84,22 @@ function Propiedad(){
             }).then(() => loadData()).catch(error => console.error('Error fetching data:', error));
         }         
     }
-    
+    const handleDetail = (id) => {
+        window.location.href = `/detalle/${id}`;
+    };
+    const handleEdit = (id) => {
+        window.location.href = `/editar/${id}`;
+    };
     return(
         <div>
             <HeaderComponent/>
             <form id="filtro" onSubmit={handleSubmit}>
-            <label htmlFor="available">
+            <label>
                 Disponible:
                 <input type="checkbox" name="available" checked={formData.disponible} onChange={handleChange}/>
             </label>
 
-            <label htmlFor="location">
+            <label>
                 Localidad:
                 <select value={formData.localidad} name="localidad" onChange={handleChange}>
                     <option value="">Selecciona una propiedad</option>
@@ -104,12 +109,12 @@ function Propiedad(){
                 </select>
             </label>
 
-            <label htmlFor="startDate">
+            <label>
                 Fecha de inicio:
                 <input type="date" name="startDate" value={formData.fechaDesde} onChange={handleChange} />
             </label>
 
-            <label htmlFor="guests">
+            <label >
                 Cantidad de huéspedes:
                 <input type="number" name="guests" value={formData.cantHuesped} onChange={handleChange}/>
             </label>
@@ -126,9 +131,9 @@ function Propiedad(){
                         Fecha disponibilidad: {item.fecha_inicio_disponibilidad}<br/>
                         Valor Noche:{item.valor_noche}<br/>
                         Cantidad de Huespedes: {item.cantidad_huespedes}<br/>
-                        <button type="boton" className="boton"><a href="http://localhost:3000/editar" >Editar</a></button>
+                        <button type="boton" className="boton" onClick={() => handleEdit(item.id)}>Editar</button>
                         <button className="boton-eliminarP" onClick={() => handleDelete(item.id)}>Eliminar</button>
-                        <button className="boton-detalle" ><a href="http://localhost:3000/detalle" >Detalles</a></button>
+                        <button className="boton-detalle" onClick={() => handleDetail(item.id)}>Detalles</button>
                     </li> ))
                 }
              </ul>

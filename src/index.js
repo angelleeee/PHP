@@ -21,12 +21,14 @@ root.render(
         <Route path="/tipos_propiedad" element={<TipoPropiedadPage/>}/>
         <Route path="/tipos_propiedad/editar/:id" element={<EditTipoPropiedad/>}/>
         <Route path="/tipos_propiedad/crear" element={<NewTipoPropiedad/>}/>
+
         <Route path="/reserva" element={<Reserva/>}/>
-        <Route path="/reserva/crear" element={<NewReserva/>}/>
         <Route path="/reserva/editar/:id" element={<EditReserva/>}/>
+        <Route path="/reserva/crear" element={<NewReserva/>}/>
+
         <Route path="/" element={<Propiedad/>}/>
         <Route path="/crear" element={<NewPropiedad/>}/>
-        <Route path="/editar" element={<EditPropiedad/>}/>
+        <Route path="/editar/:id" element={<EditPropiedad/>}/>
         <Route path="/detalle/:id" element={<DetailPropiedad/>}/>
       </Routes> 
     </BrowserRouter>
