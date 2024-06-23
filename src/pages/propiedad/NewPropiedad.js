@@ -64,7 +64,7 @@ const NewPropiedad = () => {
   const handleSubmit =  (event) => {
     event.preventDefault();
     const validationErrors = validate();
-    setErrors(validationErrors);
+    setErrors(validationErrors);  
     fetch('http://localhost:80/propiedades', {
       method: 'POST',
       headers: {
