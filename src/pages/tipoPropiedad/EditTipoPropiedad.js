@@ -5,7 +5,7 @@ import FooterComponent from '../../components/FooterComponent';
 import "../../assets/styles/NewTipoPropiedad.css";
 
 const EditTipoPropiedad = () => {
-    const { id } = useParams(); // Asegúrate de que 'id' es el nombre correcto del parámetro en la URL
+    const { id } = useParams(); 
     const [data, setData] = useState([]);
     const [currentValue, setCurrentValue] = useState("");
     const [message, setMessage] = useState('');
