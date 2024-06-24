@@ -94,32 +94,32 @@ function Propiedad(){
         <div>
             <HeaderComponent/>
             <form id="filtro" onSubmit={handleSubmit}>
-            <label>
-                Disponible:
-                <input type="checkbox" name="available" checked={formData.disponible} onChange={handleChange}/>
-            </label>
+                <label>
+                    Disponible:
+                    <input type="checkbox" name="disponible" checked={formData.disponible} onChange={handleChange}/>
+                </label>
 
-            <label>
-                Localidad:
-                <select value={formData.localidad} name="localidad" onChange={handleChange}>
-                    <option value="">Selecciona una propiedad</option>
-                    {localidades.map(localidades => (
-                        <option key={localidades.id} value={localidades.id}>{localidades.nombre}</option>
-                    ))}
-                </select>
-            </label>
+                <label>
+                    Localidad:
+                    <select value={formData.localidad} name="localidad" onChange={handleChange}>
+                        <option value="">Selecciona una propiedad</option>
+                        {localidades.map(localidades => (
+                            <option key={localidades.id} value={localidades.id}>{localidades.nombre}</option>
+                        ))}
+                    </select>
+                </label>
 
-            <label>
-                Fecha de inicio:
-                <input type="date" name="startDate" value={formData.fechaDesde} onChange={handleChange} />
-            </label>
+                <label>
+                    Fecha de inicio:
+                    <input type="date" name="startDate" value={formData.fechaDesde} onChange={handleChange} />
+                </label>
 
-            <label >
-                Cantidad de huéspedes:
-                <input type="number" name="guests" value={formData.cantHuesped} onChange={handleChange}/>
-            </label>
+                <label >
+                    Cantidad de huéspedes:
+                    <input type="number" name="guests" value={formData.cantHuesped} onChange={handleChange}/>
+                </label>
 
-            <button type="submit">Filtrar</button>
+                <button type="submit">Filtrar</button>
             </form>
             
             <ul > 

@@ -1,0 +1,49 @@
+.propiedad {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px;
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .propiedad:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .imagen-propiedad {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 16px;
+  }
+  
+  .propiedad-detalles {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .propiedad-detalles h2 {
+    margin: 0;
+    font-size: 1.75rem;
+    color: #333;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+  }
+  
+  .propiedad-detalles p {
+    margin: 0;
+    color: #555;
+    font-size: 1rem;
+  }
+  
+  .propiedad-detalles p strong {
+  color:#000;
+  }

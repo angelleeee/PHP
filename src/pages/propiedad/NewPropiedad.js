@@ -18,8 +18,9 @@ const NewPropiedad = () => {
     { name: 'cochera', value: false },
     { name: 'cantidad_dias', value: '' },
     { name: 'imagen', value: null },
+    { name: 'tipo_imagen', value: '' },
   ]);
-
+  const [message, setMessage] = useState('');
   const [errors, setErrors] = useState({});
   const [localidades,setLocalidades] = useState([]);
   const [propiedades,setPropiedades] = useState([]);
@@ -53,13 +54,12 @@ const NewPropiedad = () => {
   };
 
   const handleChange = (event) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
-    /*const { name, value, type, checked } = event.target;
+    const { name, value, type, checked } = event.target;
         setFormData({
             ...formData,
             [name]: type === 'checkbox' ? checked : value,
-        });*/
-};
+        });
+  };
 
   const handleSubmit =  (event) => {
     event.preventDefault();
@@ -80,6 +80,7 @@ const NewPropiedad = () => {
   return (
     <div>
       <Header/>
+      {message && <p>{message}</p>}
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <div>
           <label>
@@ -186,9 +187,18 @@ const NewPropiedad = () => {
           </label>
           {errors.imagen && <p style={{ color: 'red' }}>{errors.imagen}</p>}
         </div>
-        <button type="submit">Enviar</button>
+        
+        <div>
+          <label>
+            Tipo de imagen:
+            <input type="text" name="tipo_imagen" value={formData.tipo_imagen} onChange={handleChange}/>
+          </label>
+        </div>
 
+        
+        <button type="submit">Enviar</button>
       </form>
+      {message && <p>{message}</p>}
       <button type="button" id="volver"><a href="http://localhost:3000">Volver</a></button>
 
       <FooterComponent/>

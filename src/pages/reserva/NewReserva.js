@@ -88,8 +88,8 @@ const NewReserva = () => {
                 </label>
                 <br />
                 <button type="submit">Enviar Reserva</button>
+                {mensaje && <p>{mensaje}</p>}
             </form>
-            {mensaje && <p>{mensaje}</p>}
             <button type="button" id="volver"><a href="http://localhost:3000/reserva">Volver</a></button>
             <FooterComponent/>
         </div>

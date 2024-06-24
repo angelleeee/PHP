@@ -12,7 +12,7 @@ const EditReserva = () => {
         { name: 'inquilino_id', value: '' },
         { name: 'fecha_desde', value: '' },
         { name: 'cantidad_noches', value: '' },
-        { name: 'valorTotal', value: '' }
+        { name: 'valor_total', value: '' }
     ]);
 
     const [mensaje, setMensaje] = useState('');
@@ -43,7 +43,7 @@ const EditReserva = () => {
                         inquilino_id: reserva.inquilino_id,
                         fecha_desde: reserva.fecha_desde,
                         cantidad_noches: reserva.cantidad_noches,
-                        valorTotal: reserva.valorTotal
+                        valor_total: reserva.valor_total
                     });
                 }
             })
@@ -112,12 +112,12 @@ const EditReserva = () => {
                 <br />
                 <label>
                     Valor Total:
-                    <input type="number" name="valorTotal" value={formData.valorTotal} onChange={handleChange} required />
+                    <input type="number" name="valor_total" value={formData.valor_total} onChange={handleChange} required />
                 </label>
                 <br />
-                <button type="submit">Enviar Reserva</button>
+                <button type="submit">Confirmar</button>
             </form>
-            {mensaje && <p>{mensaje}</p>}
+            
             <button type="button" id="volver"><a href="http://localhost:3000/reserva">Volver</a></button>
             <FooterComponent />
         </div>
