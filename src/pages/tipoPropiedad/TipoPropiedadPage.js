@@ -8,7 +8,6 @@ import React, { useState, useEffect } from "react";
 function TipoPropiedad() {
     const [data, setData] = useState([]);
     const [error, setError] = useState(''); 
-    const [message, setMessage] = useState('');
 
     useEffect(() => { 
         loadData();
@@ -27,9 +26,13 @@ function TipoPropiedad() {
             })
             .then((response) => {
                 if (!response.ok) {
-                    return response.json().then(error =>{setError(error.message)});
+                    return response.json().then(error =>{
+                        setError(error.status)});
                 }
-                return response.json();
+                return response.json()
+                .then(error=>{
+                    setError(error.message)
+                });
             })
             .then(() => loadData())
             .catch(error => {

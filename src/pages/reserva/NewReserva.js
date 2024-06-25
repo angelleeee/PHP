@@ -5,6 +5,7 @@ import FooterComponent from '../../components/FooterComponent';
 const NewReserva = () => {
     const [propiedades, setPropiedades] = useState([]);
     const [inquilinos, setInquilinos] = useState([]);
+    const [error, setError] = useState('');
     const [formData, setFormData] = useState({
         propiedad_id: '' ,
         inquilino_id: '' ,
@@ -12,8 +13,6 @@ const NewReserva = () => {
         cantidad_noches: '',
         valor_total: '',
 });
-
-    const [mensaje, setMensaje] = useState('');
 
     useEffect(() => {
         // Aquí realiza la solicitud al backend para obtener la lista de propiedades
@@ -43,15 +42,24 @@ const NewReserva = () => {
             },
             body: JSON.stringify(formData)
         })
-            .then(response => response.json())
-            .then(data => setMensaje(data.message))
-            .catch(error => console.error('Error submitting form:', error));
+        .then((response) => {
+            if (!response.ok) {
+                return response.json().then(error =>{
+                    setError(error.message['fec'])});
+            }
+            return response.json()
+            .then(error=>{
+                setError(error.message)
+            });
+        })
+        .catch(error => console.error('Error submitting form:', error));
     };
 
     return (
         <div>
             <Header/>
             <form onSubmit={handleSubmit}>
+                {error && <p>{error}</p>}   
                 <label>
                     Propiedad:
                     <select name="propiedad_id" value={formData.propiedad_id} onChange={handleChange} required>
@@ -88,7 +96,6 @@ const NewReserva = () => {
                 </label>
                 <br />
                 <button type="submit">Enviar Reserva</button>
-                {mensaje && <p>{mensaje}</p>}
             </form>
             <button type="button" id="volver"><a href="http://localhost:3000/reserva">Volver</a></button>
             <FooterComponent/>

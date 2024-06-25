@@ -8,6 +8,7 @@ function Reserva(){
     const [data, setData] = useState([]); 
     const[inquilino,setInquilino] = useState([]);
     const[reserva,setReserva] = useState([]);
+    const[error, setError] =useState('');
     useEffect(() => {                                         
         fetch('http://localhost:80/propiedades')
         .then(response => response.json())
@@ -44,6 +45,16 @@ function Reserva(){
             fetch(`http://localhost:80/reservas/${id}`,  {
                 method: 'DELETE',
             })
+            .then((response) => {
+                if (!response.ok) {
+                    return response.json().then(error =>{
+                        setError(error.message['fecha'])});
+                }
+                return response.json()
+                .then(error=>{
+                    setError(error.message)
+                });
+            })
             .then(() => loadData())
             .catch(error => console.error('Error fetching data:', error));
         }         
@@ -55,7 +66,8 @@ function Reserva(){
     return(
         <div>
             <HeaderComponent />
-            <ul > 
+            <ul >   
+                {error && <p>{error}</p>}
                 {reserva.map(item => ( 
                     <li key={item.id} className="li">
                         Domicilio: {domicilio(item.propiedad_id)}<br/>

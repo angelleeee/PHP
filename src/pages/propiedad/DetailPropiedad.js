@@ -37,9 +37,9 @@ const DetailPropiedad = () =>{
         loadData();
     }, []);
     function loadData (){
-        fetch('http://localhost:80/propiedades')
+        fetch('http://localhost:80/tipos_propiedad')
         .then(response => response.json())
-        .then(data => setData(data.data)) .catch(error => console.error('Error fetching data:', error)); 
+        .then(tiposPropiedad => setTiposPropiedad(tiposPropiedad.data)) .catch(error => console.error('Error fetching data:', error)); 
     }
     useEffect(() => { 
         fetch('http://localhost:80/localidades')

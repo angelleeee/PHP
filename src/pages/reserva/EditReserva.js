@@ -15,7 +15,7 @@ const EditReserva = () => {
         valor_total: '',
 });
 
-    const [mensaje, setMensaje] = useState('');
+    const [error, setError] = useState('');
 
     useEffect(()=>{
         // Obtener la lista de propiedades
@@ -65,21 +65,26 @@ const EditReserva = () => {
             },
             body: JSON.stringify(formData)
         })
-            .then(response => response.json())
-            .then(data => {
-                if (data.message) {
-                    setMensaje(data.message);
-                } else {
-                    setMensaje('Reserva actualizada correctamente');
-                }
-            })
-            .catch(error => setMensaje('Error al enviar el formulario: ' + error.message));
+        .then((response) => {
+            if (!response.ok) {
+                return response.json().then(error => {
+                    const errorMessages = Object.keys(error.message).map(key => ` ${error.message[key]}`).join('\n');
+                    setError(errorMessages);
+                });
+            }
+            return response.json()
+            .then(error=>{
+                setError(error.message)
+            });
+        })
+        .catch(error => setError('Error al enviar el formulario: ' + error.message));
     };
 
     return (
         <div>
             <Header />
             <form onSubmit={handleSubmit}>
+                {error && <pre>{error}</pre>}
                 <label>
                     Propiedad:
                     <select name="propiedad_id" value={formData.propiedad_id} onChange={handleChange} required>

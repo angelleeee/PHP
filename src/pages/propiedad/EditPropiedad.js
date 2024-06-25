@@ -15,8 +15,8 @@ const EditPropiedad = () => {
         tipo_propiedad_id: '' ,
         valor_noche: '' ,
         fecha_inicio_disponibilidad: '' ,
-        cantidad_habitaciones: '' ,
-        cantidad_banios: '' ,
+        cantidad_habitaciones: null ,
+        cantidad_banios: null ,
         cochera:'0',
         cantidad_dias: '',
         imagen:null,
@@ -131,11 +131,6 @@ const EditPropiedad = () => {
                 </div>
 
                 <div>
-                    Cantidad de Huespedes:
-                    <input type="number"  name="cantidad_huespedes"  value={formData.cantidad_huespedes}  onChange={handleChange}/>
-                </div>
-
-                <div>
                     Cantidad de Días:
                     <input type="text" name="cantidad_dias" value={formData.cantidad_dias} onChange={handleChange}/>
                 </div>
@@ -147,7 +142,7 @@ const EditPropiedad = () => {
 
                 <div>
                     Disponible:
-                    <input type="checkbox" name="disponible" checked={formData.disponible==='1'} onChange={handleChange}/>
+                    <input type="checkbox" name="disponible" checked={formData.disponible} onChange={handleChange}/>
                 </div>
                 
                 <div>

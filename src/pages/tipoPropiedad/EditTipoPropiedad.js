@@ -8,7 +8,7 @@ const EditTipoPropiedad = () => {
     const { id } = useParams(); 
     const [data, setData] = useState([]);
     const [currentValue, setCurrentValue] = useState("");
-    const [message, setMessage] = useState('');
+    const [error, setError] = useState('');
     const loadData = () => {
         fetch('http://localhost:80/tipos_propiedad')
             .then(response => response.json())
@@ -41,12 +41,19 @@ const EditTipoPropiedad = () => {
             },
             body: JSON.stringify(updatedData),
         })
-            .then(() => loadData())
-            .then(data => {
-                if (data.message) {
-                  setMessage(data.message);
-                }})
-            .catch(error => console.error('Error updating data:', error));
+        .then((response) => {
+            if (!response.ok) {
+                return response.json().then(error => {
+                    const errorMessages = Object.keys(error.message).map(key => ` ${error.message[key]}`).join('\n');
+                    setError(errorMessages);
+                });
+            }
+            return response.json()
+            .then(error=>{
+                setError(error.message)
+            });
+        })
+        .catch(error => console.error('Error updating data:', error));
     };
 
     const handleInputChange = (e) => {
@@ -58,7 +65,7 @@ const EditTipoPropiedad = () => {
             <Header/>
             <form>
                 <input className="input_edit" type="text" value={currentValue} onChange={handleInputChange}/>
-                {message && <p>{message}</p>} 
+                {error && <p>{error}</p>} 
                 <button type="button" className="boton" onClick={() => handleUpdate(id, { nombre: currentValue })}>Confirmar</button>
             </form>
             <button type="button" id="volver">

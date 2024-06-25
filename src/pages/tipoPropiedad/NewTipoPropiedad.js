@@ -5,7 +5,7 @@ import "../../assets/styles/NewTipoPropiedad.css"
 
 const NewTipoPropiedad = () => {
   const [nombre, setNombre] = useState('');
-  const [mensaje, setMensaje] = useState('');
+  const [error, setError] = useState('');
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = { nombre };
@@ -23,20 +23,17 @@ const NewTipoPropiedad = () => {
     })
     .then((response) => {
       if (!response.ok) {
-        throw new Error('Error en la solicitud.');
+          return response.json().then(error =>{
+              setError(error.message['nombre repetido'])});
       }
-      return response.json();
-    })
-    .then(data => {
-      if (data.message) {
-        setMensaje(data.message);
-        setNombre(''); 
-      }
-    })
+      return response.json()
+      .then(error=>{
+          setError(error.message)
+      });
+  })
     .catch(error => {
-      console.error('Error:', error);
-      setMensaje('El tipo de propiedad no puede repetirse'); 
-    });
+      console.error('Error fetching data:', error);
+  });
   };
 
   return (
@@ -45,7 +42,7 @@ const NewTipoPropiedad = () => {
         <form onSubmit={handleSubmit}>
           <div>
             <input type="text" id="nombre" value={nombre} onChange={(e) => setNombre(e.target.value)}/>
-              {mensaje && <p>{mensaje}</p>} 
+              {error && <p>{error}</p>} 
           </div>
           <button type="submit" id='crear'>Crear</button>
         </form>
