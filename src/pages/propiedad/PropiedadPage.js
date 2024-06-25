@@ -8,7 +8,7 @@ function Propiedad(){
     const [data, setData] = useState([]); 
     const [localidad,setLocalidad] = useState([]);
     const[propiedad,setPropiedad] = useState([]);
-
+    const [error, setError] = useState('');
       
     useEffect(() => { 
         loadData();
@@ -69,13 +69,6 @@ function Propiedad(){
       };
       
 
-
-
-
-
-
-
-    
     const handleSubmit = (event) => {
         event.preventDefault();
         const query = new URLSearchParams();
@@ -93,7 +86,19 @@ function Propiedad(){
         if(window.confirm("Estas seguro que queres eliminar esta propiedad?")){
             fetch(`http://localhost:80/propiedades/${id}`,  {
                 method: 'DELETE',
-            }).then(() => loadData()).catch(error => console.error('Error fetching data:', error));
+            })
+            .then((response) => {
+                if (!response.ok) {
+                    return response.json().then(error =>{
+                        setError(error.message['reservada'])});
+                }
+                return response.json()
+                .then(error=>{
+                    setError(error.message)
+                });
+            })
+            .then(()=>loadData())
+            .catch(error => console.error('Error fetching data:', error));
         }         
     }
     const handleDetail = (id) => {
@@ -135,6 +140,7 @@ function Propiedad(){
             </form>
             
             <ul > 
+                {error && <p>{error}</p>}
                 {data.map(item => ( 
                     <li key={item.id} className="li">
                         Domicilio: {item.domicilio}<br/>

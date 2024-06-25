@@ -7,11 +7,12 @@ const EditPropiedad = () => {
     const { id } = useParams();
     const [localidades, setLocalidades] = useState([]);
     const [tipoPropiedad, setTipoPropiedad] = useState([]);
+    const [error, setError] = useState('');
     const [formData, setFormData] = useState({
         domicilio:'',
         localidad_id:'',
-        cantidad_huespedes: '' ,
-        disponible: '0' ,
+        cantidad_huespedes: null ,
+        disponible: '0',
         tipo_propiedad_id: '' ,
         valor_noche: '' ,
         fecha_inicio_disponibilidad: '' ,
@@ -68,7 +69,7 @@ const EditPropiedad = () => {
         const { name, value, type, checked } = event.target;
             setFormData({
                 ...formData,
-                [name]: type === 'checkbox' ? (checked? '1':'0') : value,
+                [name]: type === 'checkbox' ? (checked? '1' : '0') : value,
             });
     };
     const handleSubmit = (event) => {
@@ -81,20 +82,25 @@ const EditPropiedad = () => {
             },
             body: JSON.stringify(formData)
         })
-            .then(response => response.json())
-            .then(data => {
-                if (data.message) {
-                    setMensaje(data.message);
-                } else {
-                    setMensaje('Propiedad actualizada correctamente');
-                }
-            })
-            .catch(error => setMensaje('Error al enviar el formulario: ' + error.message));
+        .then((response) => {
+            if (!response.ok) {
+                return response.json().then(error => {
+                    const errorMessages = Object.keys(error.message).map(key => ` ${error.message[key]}`).join('\n');
+                    setError(errorMessages);
+                });
+            }
+            return response.json()
+            .then(error=>{
+                setError(error.message)
+            });
+        })
+        .catch(error => setMensaje('Error al enviar el formulario: ' + error.message));
     };
     return (
         <div>
             <Header/>
             <form onSubmit={handleSubmit}>
+                {error && <p>{error}</p>}
                 <div>
                     Domicilio:
                     <input type="text" name="domicilio" value={formData.domicilio} onChange={handleChange}/>

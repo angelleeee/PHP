@@ -20,6 +20,7 @@ const NewPropiedad = () => {
     imagen:null,
     tipo_imagen:'' ,
 });
+  const [error, setError] = useState('');
   const [message, setMessage] = useState('');
   const [errors, setErrors] = useState({});
   const [localidades,setLocalidades] = useState([]);
@@ -72,14 +73,18 @@ const NewPropiedad = () => {
       },
       body: JSON.stringify(formData)
     })
-    .then(response => response.json())
-    .then(({ result, response }) => {
-      if (!response.ok) {
-        const errorMessages = typeof result.message === 'object' ? Object.values(result.message).join(', ') : result.message;
-        setMessage(errorMessages);
-      } else {
-        setMessage(result.message);
-      }})
+    .then((response) => {
+      if (!response) {
+          return response.json().then(error => {
+              const errorMessages = Object.keys(error.message).map(key => ` ${error.message[key]}`).join('\n');
+              setError(errorMessages);
+          });
+      }
+      return response.json()
+      .then(error=>{
+          setError(error.message)
+      });
+    })
     .catch(error => console.error('Error submitting form:', error));
   }
   
@@ -87,9 +92,9 @@ const NewPropiedad = () => {
   return (
     <div>
       <Header/>
-      {message && <p>{message}</p>}
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <div>
+          {error && <p>{error}</p>}
           <label>
             Domicilio:
             <input type="text" name="domicilio" value={formData.domicilio} onChange={handleChange}/>
