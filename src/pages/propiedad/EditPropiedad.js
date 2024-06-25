@@ -4,24 +4,24 @@ import Header from "../../components/HeaderComponent";
 import { useState, useEffect } from "react";
 
 const EditPropiedad = () => {
-    const { id } = useParams(); // Llamar a useParams como una función
+    const { id } = useParams();
     const [localidades, setLocalidades] = useState([]);
     const [tipoPropiedad, setTipoPropiedad] = useState([]);
-    const [formData, setFormData] = useState([
-        { name: 'domicilio', value: '' },
-        { name: 'localidad_id', value: '' },
-        { name: 'cantidad_huespedes', value: '' },
-        { name: 'disponible', value: false },
-        { name: 'tipo_propiedad_id', value: '' },
-        { name: 'valor_noche', value: '' },
-        { name: 'fecha_inicio_disponibilidad', value: '' },
-        { name: 'cantidad_habitaciones', value: '' },
-        { name: 'cantidad_banios', value: '' },
-        { name: 'cochera', value: false },
-        { name: 'cantidad_dias', value: '' },
-        { name: 'imagen', value: null },
-        { name: 'tipo_imagen', value: '' },,
-    ]);
+    const [formData, setFormData] = useState({
+        domicilio:'',
+        localidad_id:'',
+        cantidad_huespedes: '' ,
+        disponible: '0' ,
+        tipo_propiedad_id: '' ,
+        valor_noche: '' ,
+        fecha_inicio_disponibilidad: '' ,
+        cantidad_habitaciones: '' ,
+        cantidad_banios: '' ,
+        cochera:'0',
+        cantidad_dias: '',
+        imagen:null,
+        tipo_imagen:'' ,
+    });
     const [mensaje, setMensaje] = useState('');
 
     useEffect(() => { 
@@ -68,7 +68,7 @@ const EditPropiedad = () => {
         const { name, value, type, checked } = event.target;
             setFormData({
                 ...formData,
-                [name]: type === 'checkbox' ? checked : value,
+                [name]: type === 'checkbox' ? (checked? '1':'0') : value,
             });
     };
     const handleSubmit = (event) => {
@@ -147,7 +147,7 @@ const EditPropiedad = () => {
 
                 <div>
                     Disponible:
-                    <input type="checkbox" name="disponible" checked={formData.disponible} onChange={handleChange}/>
+                    <input type="checkbox" name="disponible" checked={formData.disponible==='1'} onChange={handleChange}/>
                 </div>
                 
                 <div>

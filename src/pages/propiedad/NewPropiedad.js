@@ -5,21 +5,21 @@ import { useEffect,useState } from 'react';
 import '../../assets/styles/NewPropiedad.css'
 
 const NewPropiedad = () => {
-  const [formData, setFormData] = useState([
-    { name: 'domicilio', value: '' },
-    { name: 'localidad_id', value: '' },
-    { name: 'cantidad_huespedes', value: '' },
-    { name: 'disponible', value: false },
-    { name: 'tipo_propiedad_id', value: '' },
-    { name: 'valor_noche', value: '' },
-    { name: 'fecha_inicio_disponibilidad', value: '' },
-    { name: 'cantidadHabitaciones', value: '' },
-    { name: 'cantidadBanios', value: '' },
-    { name: 'cochera', value: false },
-    { name: 'cantidad_dias', value: '' },
-    { name: 'imagen', value: null },
-    { name: 'tipo_imagen', value: '' },
-  ]);
+  const [formData, setFormData] = useState({
+    domicilio:'',
+    localidad_id:'',
+    cantidad_huespedes: '' ,
+    disponible: '0' ,
+    tipo_propiedad_id: '' ,
+    valor_noche: '' ,
+    fecha_inicio_disponibilidad: '' ,
+    cantidad_habitaciones: '' ,
+    cantidad_banios: '' ,
+    cochera:'0',
+    cantidad_dias: '',
+    imagen:null,
+    tipo_imagen:'' ,
+});
   const [message, setMessage] = useState('');
   const [errors, setErrors] = useState({});
   const [localidades,setLocalidades] = useState([]);
@@ -57,7 +57,7 @@ const NewPropiedad = () => {
     const { name, value, type, checked } = event.target;
         setFormData({
             ...formData,
-            [name]: type === 'checkbox' ? checked : value,
+            [name]: type === 'checkbox' ? (checked ? '1' : '0') : value,
         });
   };
 
@@ -73,6 +73,13 @@ const NewPropiedad = () => {
       body: JSON.stringify(formData)
     })
     .then(response => response.json())
+    .then(({ result, response }) => {
+      if (!response.ok) {
+        const errorMessages = typeof result.message === 'object' ? Object.values(result.message).join(', ') : result.message;
+        setMessage(errorMessages);
+      } else {
+        setMessage(result.message);
+      }})
     .catch(error => console.error('Error submitting form:', error));
   }
   
@@ -124,7 +131,7 @@ const NewPropiedad = () => {
         <div>
           <label>
             Cochera:
-            <input type="checkbox" name="cochera" checked={formData.cochera} onChange={handleChange}/>
+            <input type="checkbox" name="cochera" checked={formData.cochera==='1'} onChange={handleChange}/>
           </label>
         </div>
 
@@ -155,7 +162,7 @@ const NewPropiedad = () => {
         <div>
           <label>
             Disponible:
-            <input type="checkbox" name="disponible" checked={formData.disponible} onChange={handleChange}/>
+            <input type="checkbox" name="disponible" checked={formData.disponible==='1'} onChange={handleChange}/>
           </label>
         </div>
 

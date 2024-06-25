@@ -1,7 +1,6 @@
 import HeaderComponent from "../../components/HeaderComponent";
 import FooterComponent from "../../components/FooterComponent";
 import React,{useState, useEffect} from "react";
-import NewReserva from "./NewReserva";
 import '../../assets/styles/ReservaPage.css';
 
 

@@ -30,7 +30,7 @@ const EditTipoPropiedad = () => {
 
     const nombreLocalidad = (id) => {
         const loc = data.find(item => item.id === parseInt(id)); 
-        return loc ? loc.nombre : 'Localidad no encontrada';
+        return loc.nombre
     };
 
     const handleUpdate = (id, updatedData) => {
@@ -57,7 +57,7 @@ const EditTipoPropiedad = () => {
         <div>
             <Header/>
             <form>
-                <input className="input_edit" type="text" value={currentValue || nombreLocalidad(id)} onChange={handleInputChange}/>
+                <input className="input_edit" type="text" value={currentValue} onChange={handleInputChange}/>
                 {message && <p>{message}</p>} 
                 <button type="button" className="boton" onClick={() => handleUpdate(id, { nombre: currentValue })}>Confirmar</button>
             </form>

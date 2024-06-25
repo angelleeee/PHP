@@ -7,13 +7,13 @@ const EditReserva = () => {
     const { id } = useParams();
     const [propiedades, setPropiedades] = useState([]);
     const [inquilinos, setInquilinos] = useState([]);
-    const [formData, setFormData] = useState([
-        { name: 'propiedad_id', value: '' },
-        { name: 'inquilino_id', value: '' },
-        { name: 'fecha_desde', value: '' },
-        { name: 'cantidad_noches', value: '' },
-        { name: 'valor_total', value: '' }
-    ]);
+    const [formData, setFormData] = useState({
+        propiedad_id: '' ,
+        inquilino_id: '' ,
+        fecha_desde: '' ,
+        cantidad_noches: '',
+        valor_total: '',
+});
 
     const [mensaje, setMensaje] = useState('');
 

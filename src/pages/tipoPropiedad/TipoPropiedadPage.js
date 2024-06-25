@@ -4,9 +4,11 @@ import FooterComponent from "../../components/FooterComponent";
 import '../../assets/styles/TipoPropiedad.css';
 import React, { useState, useEffect } from "react";
 
+
 function TipoPropiedad() {
     const [data, setData] = useState([]);
-    const [error, setError] = useState(""); // Estado para guardar el mensaje de error
+    const [error, setError] = useState(''); 
+    const [message, setMessage] = useState('');
 
     useEffect(() => { 
         loadData();
@@ -23,16 +25,15 @@ function TipoPropiedad() {
             fetch(`http://localhost:80/tipos_propiedad/${id}`, {
                 method: 'DELETE',
             })
-            .then(error => {
-                if (error) {
-                    throw new Error(`El tipo de propiedad está asociado a una propiedad`);
+            .then((response) => {
+                if (!response.ok) {
+                    return response.json().then(error =>{setError(error.message)});
                 }
-                return error.json();
+                return response.json();
             })
             .then(() => loadData())
             .catch(error => {
                 console.error('Error fetching data:', error);
-                setError(error.message); 
             });
         }
     }
