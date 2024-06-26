@@ -110,6 +110,7 @@ function Propiedad() {
         window.location.href = `/editar/${id}`;
     };
 
+
     return (
         <div>
             <HeaderComponent />

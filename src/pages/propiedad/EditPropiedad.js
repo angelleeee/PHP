@@ -97,7 +97,7 @@ const EditPropiedad = () => {
             .catch(error => setError('Error al enviar el formulario: ' + error.message));
     };
 
-    console.log(formData);
+
 
     return (
         <div>
