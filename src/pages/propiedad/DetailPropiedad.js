@@ -72,7 +72,9 @@ const DetailPropiedad = () =>{
             }) 
             .catch(error => console.error('Error fetching data:', error)); 
     }, [id]);
-
+    function booleano(x){
+        return x ==='1' ? 'Disponible' : 'No disponible';
+    }
     return(
         <div>
             <Header/>
@@ -89,7 +91,7 @@ const DetailPropiedad = () =>{
                     <p><strong>Fecha de inicio de disponibilidad:</strong> {formData.fecha_inicio_disponibilidad}</p>
                     <p><strong>Cantidad de días:</strong> {formData.cantidad_dias}</p>
                     <p><strong>Valor por noche:</strong> ${formData.valor_noche}</p>
-                    <p><strong>Disponible:</strong> {formData.disponible}</p>
+                    <p><strong>{booleano(formData.disponible)}</strong> </p>
                 </div>
             </div>
             <button type="button" id="volver"><a href="http://localhost:3000">Volver</a></button>
