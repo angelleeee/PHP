@@ -25,20 +25,6 @@ const EditPropiedad = () => {
     });
 
     useEffect(() => {
-        fetch('http://localhost:80/localidades')
-            .then(response => response.json())
-            .then(localidades => setLocalidades(localidades.data))
-            .catch(error => console.error('Error fetching data:', error));
-    }, []);
-
-    useEffect(() => {
-        fetch('http://localhost:80/tipos_propiedad')
-            .then(response => response.json())
-            .then(tipoPropiedad => setTipoPropiedad(tipoPropiedad.data))
-            .catch(error => console.error('Error fetching data:', error));
-    }, []);
-
-    useEffect(() => {
         fetch('http://localhost:80/propiedades')
             .then(response => response.json())
             .then(propiedad => {
@@ -61,6 +47,14 @@ const EditPropiedad = () => {
                     });
                 }
             })
+            .catch(error => console.error('Error fetching data:', error));
+        fetch('http://localhost:80/localidades')
+            .then(response => response.json())
+            .then(localidades => setLocalidades(localidades.data))
+            .catch(error => console.error('Error fetching data:', error));
+        fetch('http://localhost:80/tipos_propiedad')
+            .then(response => response.json())
+            .then(tipoPropiedad => setTipoPropiedad(tipoPropiedad.data))
             .catch(error => console.error('Error fetching data:', error));
     }, [id]);
 
