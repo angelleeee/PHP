@@ -11,15 +11,13 @@ function Reserva(){
     const[error, setError] =useState('');
     useEffect(() => {                                         
         fetch('http://localhost:80/propiedades')
-        .then(response => response.json())
-        .then(data => setData(data.data)) 
-        .catch(error => console.error('Error fetching data:', error)); 
-    }, []);
-    useEffect(() => { 
+            .then(response => response.json())
+            .then(data => setData(data.data)) 
+            .catch(error => console.error('Error fetching data:', error)); 
         fetch('http://localhost:80/inquilinos')
-        .then(response => response.json())
-        .then(inquilino => setInquilino(inquilino.data)) 
-        .catch(error => console.error('Error fetching data:', error)); 
+            .then(response => response.json())
+            .then(inquilino => setInquilino(inquilino.data)) 
+            .catch(error => console.error('Error fetching data:', error)); 
     }, []);
     useEffect(() => { 
         loadData();

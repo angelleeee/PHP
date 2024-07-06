@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import FooterComponent from '../../components/FooterComponent';
 
-const EditReserva = () => {
+function EditReserva() {
     const { id } = useParams();
     const [propiedades, setPropiedades] = useState([]);
     const [inquilinos, setInquilinos] = useState([]);
@@ -16,23 +16,17 @@ const EditReserva = () => {
 });
 
     const [error, setError] = useState('');
+    const [message, setMessage] = useState('');
 
     useEffect(()=>{
-        // Obtener la lista de propiedades
         fetch('http://localhost:80/propiedades')
             .then(response => response.json())
             .then(propiedades => setPropiedades(propiedades.data))
             .catch(error => console.error('Error fetching propiedades:', error));
-    })
-    useEffect(()=>{
-        // Obtener la lista de inquilinos
         fetch('http://localhost:80/inquilinos')
             .then(response => response.json())
             .then(inquilinos => setInquilinos(inquilinos.data))
             .catch(error => console.error('Error fetching inquilinos:', error));
-    })
-    useEffect(() => {
-        // Obtener todas las reservas
         fetch('http://localhost:80/reservas')
             .then(response => response.json())
             .then(reservas => {
@@ -48,7 +42,8 @@ const EditReserva = () => {
                 }
             })
             .catch(error => console.error('Error fetching reservas:', error));
-    }, [id]);
+    },[])
+
 
     const handleChange = (event) => {
         setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -65,18 +60,13 @@ const EditReserva = () => {
             },
             body: JSON.stringify(formData)
         })
-        .then((response) => {
+        .then(response => response.json().then(data => {
             if (!response.ok) {
-                return response.json().then(error => {
-                    const errorMessages = Object.keys(error.message).map(key => ` ${error.message[key]}`).join('\n');
-                    setError(errorMessages);
-                });
-            }
-            return response.json()
-            .then(error=>{
-                setError(error.message)
-            });
-        })
+              setError(data.message);
+            }else{
+                setMessage(data.message)
+            } 
+          }))
         .catch(error => setError('Error al enviar el formulario: ' + error.message));
     };
 
@@ -84,40 +74,46 @@ const EditReserva = () => {
         <div>
             <Header />
             <form onSubmit={handleSubmit}>
-                {error && <pre>{error}</pre>}
+                {message && <p>{message}</p>}
+                {error['invalido'] && <p>{error['invalido']}</p>}
                 <label>
                     Propiedad:
-                    <select name="propiedad_id" value={formData.propiedad_id} onChange={handleChange} required>
+                    <select name="propiedad_id" value={formData.propiedad_id} onChange={handleChange}>
                         <option value="">Selecciona una propiedad</option>
                         {propiedades.map(propiedad => (
                             <option key={propiedad.id} value={propiedad.id}>{propiedad.domicilio}</option>
                         ))}
                     </select>
                 </label>
+                {error['propiedad_id_vacio'] && <p>{error['propiedad_id_vacio']}</p>}
+                {error['propiedad_id'] && <p>{error['propiedad_id']}</p>}
                 <br />
                 <label>
                     Inquilino:
-                    <select name="inquilino_id" value={formData.inquilino_id} onChange={handleChange} required>
+                    <select name="inquilino_id" value={formData.inquilino_id} onChange={handleChange}>
                         <option value="">Selecciona un inquilino</option>
                         {inquilinos.map(inquilino => (
                             <option key={inquilino.id} value={inquilino.id}>{inquilino.nombre}</option>
                         ))}
                     </select>
                 </label>
+                {error['inquilino_id_vacio'] && <p>{error['inquilino_id_vacio']}</p>}
+                {error['inquilino_id'] && <p>{error['inquilino_id']}</p>}
                 <br />
                 <label>
                     Fecha Desde:
-                    <input type="date" name="fecha_desde" value={formData.fecha_desde} onChange={handleChange} required />
+                    <input type="date" name="fecha_desde" value={formData.fecha_desde} onChange={handleChange}/>
                 </label>
+                {error['fec'] && <p>{error['fec']}</p>}
                 <br />
                 <label>
                     Cantidad Noches:
-                    <input type="number" name="cantidad_noches" value={formData.cantidad_noches} onChange={handleChange} required />
+                    <input type="number" name="cantidad_noches" value={formData.cantidad_noches} onChange={handleChange}/>
                 </label>
                 <br />
                 <label>
                     Valor Total:
-                    <input type="number" name="valor_total" value={formData.valor_total} onChange={handleChange} required />
+                    <input type="number" name="valor_total" value={formData.valor_total} onChange={handleChange}/>
                 </label>
                 <br />
                 <button type="submit">Confirmar</button>

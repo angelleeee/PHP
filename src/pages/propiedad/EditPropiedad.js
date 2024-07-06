@@ -7,6 +7,7 @@ const EditPropiedad = () => {
     const { id } = useParams();
     const [localidades, setLocalidades] = useState([]);
     const [tipoPropiedad, setTipoPropiedad] = useState([]);
+    const [message,setMessage] = useState('');
     const [error, setError] = useState('');
     const [formData, setFormData] = useState({
         domicilio: '',
@@ -76,19 +77,14 @@ const EditPropiedad = () => {
             },
             body: JSON.stringify(formData)
         })
-            .then((response) => {
-                if (!response.ok) {
-                    return response.json().then(error => {
-                        const errorMessages = Object.keys(error.message).map(key => ` ${error.message[key]}`).join('\n');
-                        setError(errorMessages);
-                    });
-                }
-                return response.json()
-                    .then(error => {
-                        setError(error.message)
-                    });
-            })
-            .catch(error => setError('Error al enviar el formulario: ' + error.message));
+        .then(response => response.json().then(data => {
+            if (!response.ok) {
+              setError(data.message);
+            }else{
+              setMessage(data.message)
+            }
+          }))
+        .catch(error => setError('Error al enviar el formulario: ' + error.message));
     };
 
 
@@ -97,12 +93,13 @@ const EditPropiedad = () => {
         <div>
             <Header />
             <form onSubmit={handleSubmit}>
-                {error && <p>{error}</p>}
+                {message && <p>{message}</p>}
                 <div>
                     Domicilio:
-                    <input type="text" name="domicilio" value={formData.domicilio} onChange={handleChange} />
+                    <input type="text" name="domicilio" value={formData.domicilio} onChange={handleChange}/>
                 </div>
-
+                {error['domicilio_vacio'] && <p>{error['domicilio_vacio']}</p>}
+                {error['domicilio'] && <p>{error['domicilio']}</p>}
                 <div>
                     Localidad:
                     <select name="localidad_id" value={formData.localidad_id} onChange={handleChange}>
@@ -112,7 +109,7 @@ const EditPropiedad = () => {
                         ))}
                     </select>
                 </div>
-
+                {error['localidad_id_vacio'] && <p>{error['localidad_id_vacio']}</p>}
                 <div>
                     Tipo de propiedad:
                     <select name="tipo_propiedad_id" value={formData.tipo_propiedad_id} onChange={handleChange}>
@@ -122,27 +119,27 @@ const EditPropiedad = () => {
                         ))}
                     </select>
                 </div>
-
+                {error['tipo_propiedad_id'] && <p>{error['tipo_propiedad_id']}</p>}
                 <div>
                     Fecha disponibilidad:
                     <input type="date" name="fecha_inicio_disponibilidad" value={formData.fecha_inicio_disponibilidad} onChange={handleChange} />
                 </div>
-
+                {error['fecha_inicio_disponibilidad_vacio'] && <p>{error['fecha_inicio_disponibilidad_vacio']}</p>}
                 <div>
                     Valor noche:
                     <input type="number" name="valor_noche" value={formData.valor_noche} onChange={handleChange} />
                 </div>
-
+                {error['valor_noche_vacio'] && <p>{error['valor_noche_vacio']}</p>}
                 <div>
                     Cantidad de Días:
                     <input type="text" name="cantidad_dias" value={formData.cantidad_dias} onChange={handleChange} />
                 </div>
-
+                {error['cantidad_dias_vacio'] && <p>{error['cantidad_dias_vacio']}</p>}
                 <div>
                     Cantidad de Huéspedes:
                     <input type="text" name="cantidad_huespedes" value={formData.cantidad_huespedes} onChange={handleChange} />
                 </div>
-
+                {error['cantidad_huespedes_vacio'] && <p>{error['cantidad_huespedes_vacio']}</p>}
                 <div>
                     Disponible:
                     <input type="checkbox" name="disponible" checked={formData.disponible === '1'} onChange={handleChange} />

@@ -20,8 +20,8 @@ const NewPropiedad = () => {
     imagen: null,
     tipo_imagen: '',
   });
-
-  const [error, setError] = useState({});
+  const [message,setMessage] = useState('')
+  const [error, setError] = useState('');
   const [localidades, setLocalidades] = useState([]);
   const [propiedades, setPropiedades] = useState([]);
 
@@ -57,7 +57,9 @@ const NewPropiedad = () => {
     .then(response => response.json().then(data => {
       if (!response.ok) {
         setError(data.message);
-      } 
+      }else{
+        setMessage(data.message)
+      }
     }))
     .catch(error => console.error('Error submitting form:', error));
   };
@@ -67,7 +69,7 @@ const NewPropiedad = () => {
       <Header />
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <div>
-          {error.global && <p>{error.global}</p>}
+          {message && <p>{message}</p>}
           <label>
             Domicilio:
             <input type="text" name="domicilio" value={formData.domicilio} onChange={handleChange} />
