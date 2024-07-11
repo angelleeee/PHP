@@ -55,10 +55,10 @@ function Propiedad() {
     }, []);
 
     const [formData, setFormData] = useState({
-        disponible: '',
+        disponible: null,
         localidad: '',
         fechaDesde: '',
-        cantHuesped: '0',
+        cantHuesped: null,
     });
 
     const handleChange = (event) => {
